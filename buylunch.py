@@ -93,9 +93,11 @@ def main():
 	menu = show_menu()
 	while True:
 		maxindex = 0
+		print("##########################")
 		for arg in menu:
 			print("番号: %s メニュー名: %s 価格: %s円 カロリー: %skcal" % (arg[0],arg[1],arg[2],arg[3]))
 			maxindex = int(arg[0])
+		print("##########################")
 
 		select = input("番号を選択(複数可能)>>> ").split(",")
 		selectnum = ()
@@ -138,6 +140,9 @@ def main():
 					break
 				else:
 					print("正しく入力してください")
+		else:
+			print("Empty")
+			print("メニューに戻ります")
 
 if __name__ == '__main__':
 	db_connect()
