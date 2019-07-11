@@ -64,7 +64,7 @@ def show_menu():
 		# print(table)
 		return table
 
-def felica(selected_menu):
+def felica():
 	try:
 		clf = nfc.ContactlessFrontend("usb")
 	except IOError:
@@ -121,22 +121,23 @@ def main():
 			total_kcal += menu[arg-1][3]
 			send_menu += (menu[arg-1],)
 
-		print ("---data---")
-		print(send_menu)
-		print("----------------")
-		print("合計金額: %s円" % total_price)
-		print("合計カロリー: %skcal" % total_kcal)
-		while True:
-			payment = input("お支払いへ進むにはY、選択に戻るにはNを入力してください>>> ")
-			if payment == "Y" or payment == "y":
-				print("お支払いに進みます")
-				felica(send_menu)
-				break
-			elif payment == "N" or payment == "n":
-				print("メニューに戻ります")
-				break
-			else:
-				print("正しく入力してください")
+		if total_price != 0 and total_kcal != 0:
+			# print ("---data---")
+			# print(send_menu)
+			print("----------------")
+			print("合計金額: %s円" % total_price)
+			print("合計カロリー: %skcal" % total_kcal)
+			while True:
+				payment = input("お支払いへ進むにはY、選択に戻るにはNを入力してください>>> ")
+				if payment == "Y" or payment == "y":
+					print("お支払いに進みます")
+					felica()
+					break
+				elif payment == "N" or payment == "n":
+					print("メニューに戻ります")
+					break
+				else:
+					print("正しく入力してください")
 
 if __name__ == '__main__':
 	db_connect()
