@@ -63,7 +63,7 @@ def on_connect(tag):
 		weight = last_val
 
 	for arg in send_menu:
-		cursor.execute("INSERT INTO history (Timestamp, ID, PMM, SYS, menuname, price ,kcal, weight) value (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%f\",\"%f\")" % (str(Timestamp),ID,PMM,SYS,arg[1],arg[2],arg[3],weight))
+		cursor.execute("INSERT INTO history (Timestamp, ID, PMM, SYS, menuname, price ,kcal, weight) value (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%f\",\"%f\")" % (str(Timestamp),ID,PMM,SYS,arg[1],arg[2],arg[3],round(weight,2)))
 		conn.commit()
 		print("送信完了")
 
@@ -108,7 +108,7 @@ def weight_measure():
 	global before_weight_val
 	weight_average = 0.0
 	for i in range(10):
-		weight_val = hx.get_weight(5)
+		weight_val = hx.get_weight(5) / 1000
 		fixedval = weight_val * 0.2 + before_weight_val * 0.8
 		before_weight_val = weight_val
 		hx.power_down()
