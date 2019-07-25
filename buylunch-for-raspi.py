@@ -90,6 +90,7 @@ def felica():
 	except IOError:
 		print("リーダーが接続されていません")
 		go_to_exit()
+	print("社員証もしくはその他ICカードをかざしてください...")
 
 	rdwr_options = {
 		'targets': ['212F' , '424F'],
