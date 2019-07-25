@@ -99,7 +99,7 @@ def felica():
 	go_to_exit()
 
 def weight_measure():
-	for i in 10:
+	for i in range(10):
 		weight_val = hx.get_weight(5)
 		fixedval = weight_val * 0.2 + before_weight_val * 0.8
 		before_weight_val = weight_val
