@@ -61,7 +61,7 @@ def on_connect(tag):
 	while weight < 10.0 or w_av - last_val > 5.0:
 		print("計測中...")
 		w_av, last_val = weight_measure()
-	weight = last_val
+		weight = last_val
 
 	for arg in send_menu:
 		cursor.execute("INSERT INTO history (Timestamp, ID, PMM, SYS, menuname, price ,kcal, weight) value (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%f\",\"%f\")" % (str(Timestamp),ID,PMM,SYS,arg[1],arg[2],arg[3],weight))
