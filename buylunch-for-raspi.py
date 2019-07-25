@@ -18,7 +18,6 @@ hx.set_reference_unit(23) #補正
 hx.reset()
 hx.tare()
 before_weight_val = 0.0
-weight_average = 0.0
 
 def db_connect():
 	global conn, cursor
@@ -106,7 +105,8 @@ def felica():
 	go_to_exit()
 
 def weight_measure():
-	global before_weight_val,weight_average
+	global before_weight_val
+	weight_average = 0.0
 	for i in range(10):
 		weight_val = hx.get_weight(5)
 		fixedval = weight_val * 0.2 + before_weight_val * 0.8
