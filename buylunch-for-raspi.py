@@ -138,7 +138,7 @@ def main():
 		selectnum = ()
 		for arg in select:
 			try:
-				if(int(arg) <= maxindex):
+				if(int(arg) <= maxindex or int(arg) <= 0):
 					selectnum += (int(arg),)
 				else:
 					print("メニューにない番号が入力されました。正しい番号を入力してください。")
