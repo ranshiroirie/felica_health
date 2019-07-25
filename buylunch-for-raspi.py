@@ -17,7 +17,8 @@ hx.set_reading_format("MSB","MSB")
 hx.set_reference_unit(23) #補正
 hx.reset()
 hx.tare()
-before_weight_val = 0
+before_weight_val = 0.0
+weight_average = 0.0
 
 def db_connect():
 	global conn, cursor
@@ -55,7 +56,11 @@ def on_connect(tag):
 	# 購入履歴の送信
 	weight = 0
 	while weight < 10.0:
-		weight = weight_measure()
+		w_av = 0.0
+		last_val = 0.0
+		while w_av - last_val < 5.0:
+			w_av, last_val = weight_measure()
+		weight = last_val
 
 	for arg in send_menu:
 		cursor.execute("INSERT INTO history (Timestamp, ID, PMM, SYS, menuname, price ,kcal, weight) value (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%f\",\"%f\")" % (str(Timestamp),ID,PMM,SYS,arg[1],arg[2],arg[3],weight))
@@ -99,16 +104,17 @@ def felica():
 	go_to_exit()
 
 def weight_measure():
-	global before_weight_val
-	for i in range(15):
+	global before_weight_val,weight_average
+	for i in range(10):
 		weight_val = hx.get_weight(5)
 		fixedval = weight_val * 0.2 + before_weight_val * 0.8
 		before_weight_val = weight_val
 		hx.power_down()
 		hx.power_up()
 		time.sleep(0.1)
-	
-	return round(fixedval/1000,2)
+		weight_average += fixedval
+	weight_average = fixedval/10
+	return weight_average,fixedval
 
 def go_to_exit():
 	print("終了処理中")
