@@ -56,7 +56,7 @@ def on_connect(tag):
 	weight = 0
 	w_av = 0.0
 	last_val = 0.0
-	print("体重計に上に乗ってください")
+	print("体重計の上に乗ってください")
 	while weight < 10.0 or w_av - last_val > 3.0:
 		print("計測中...")
 		w_av, last_val = weight_measure()
