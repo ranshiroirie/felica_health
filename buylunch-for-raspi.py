@@ -56,15 +56,18 @@ def on_connect(tag):
 	# 購入履歴の送信
 	weight = 0
 	while weight < 10.0:
+		print("体重計に上に乗ってください")
 		w_av = 0.0
 		last_val = 0.0
-		while w_av - last_val < 5.0:
+		while w_av - last_val > 5.0:
+			print("計測中...")
 			w_av, last_val = weight_measure()
 		weight = last_val
 
 	for arg in send_menu:
 		cursor.execute("INSERT INTO history (Timestamp, ID, PMM, SYS, menuname, price ,kcal, weight) value (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%f\",\"%f\")" % (str(Timestamp),ID,PMM,SYS,arg[1],arg[2],arg[3],weight))
 		conn.commit()
+		print("送信完了")
 
 def show_menu():
 	try:
