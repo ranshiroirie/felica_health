@@ -119,7 +119,7 @@ def weight_measure():
 		hx.power_up()
 		time.sleep(0.05)
 		weight_average += fixedval
-	weight_average = fixedval/10
+	weight_average = weight_average/10
 	return weight_average,fixedval
 
 def go_to_exit():
