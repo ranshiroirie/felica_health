@@ -57,10 +57,12 @@ def on_connect(tag):
 	w_av = 0.0
 	last_val = 0.0
 	print("体重計の上に乗ってください")
-	while weight < 10.0 or abs(w_av - last_val) > 2.0:
+	while weight < 10.0 or abs(w_av - last_val) > 3.0:
 		print("計測中...")
 		w_av, last_val = weight_measure()
 		weight = last_val
+		print("計測平均値: %f" % w_av)
+		print("最終計測値: %f" % last_val)
 	print("測定完了")
 	print("送信中...")
 	for arg in send_menu:
