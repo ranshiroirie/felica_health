@@ -57,7 +57,7 @@ def on_connect(tag):
 	w_av = 0.0
 	last_val = 0.0
 	print("体重計の上に乗ってください")
-	while weight < 10.0 or w_av - last_val > 2.0:
+	while weight < 10.0 or abs(w_av - last_val) > 2.0:
 		print("計測中...")
 		w_av, last_val = weight_measure()
 		weight = last_val
@@ -109,13 +109,13 @@ def felica():
 def weight_measure():
 	global before_weight_val
 	weight_average = 0.0
-	for i in range(10):
+	for i in range(20):
 		weight_val = hx.get_weight(5) / 1000
 		fixedval = weight_val * 0.2 + before_weight_val * 0.8
 		before_weight_val = weight_val
 		hx.power_down()
 		hx.power_up()
-		time.sleep(0.1)
+		time.sleep(0.05)
 		weight_average += fixedval
 	weight_average = fixedval/10
 	return weight_average,fixedval
