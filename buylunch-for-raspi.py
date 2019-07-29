@@ -18,7 +18,7 @@ hx.set_reference_unit(23) #補正
 hx.reset()
 hx.tare()
 before_weight_val = 0.0
-measuretimes = 20 #計測回数
+measuretimes = 5 #計測回数
 
 def db_connect():
 	global conn, cursor
