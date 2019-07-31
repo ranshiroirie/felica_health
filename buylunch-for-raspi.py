@@ -37,9 +37,9 @@ def on_connect(tag):
     SYS = hex(tag.sys)[2:].upper()
     print("ID: %s" % ID)
     print("PMM: %s" % PMM)
-    print("SYS: %s" % SYS)
+    print("SYS: %s" % SYS.zfill(4))
     try:
-        cursor.execute("SELECT * from card_id where ID='%s' and PMM='%s' and SYS='%s'" % (ID,PMM,SYS))
+        cursor.execute("SELECT * from card_id where ID='%s' and PMM='%s' and SYS='%s'" % (ID,PMM,SYS.zfill(4)))
         table = cursor.fetchall()
     except pymysql.err.OperationalError:
         print("データベース接続失敗")
@@ -51,7 +51,7 @@ def on_connect(tag):
         surname = input('>> ')
         print("名を入力してEnterして下さい")
         givenname = input('>> ')
-        cursor.execute("INSERT INTO card_id (ID, PMM, SYS, surname, givenname) value (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\")" % (ID,PMM,SYS,surname,givenname))
+        cursor.execute("INSERT INTO card_id (ID, PMM, SYS, surname, givenname) value (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\")" % (ID,PMM,SYS.zfill(4),surname,givenname))
         conn.commit()
         print("登録完了")
 
@@ -73,7 +73,7 @@ def on_connect(tag):
     print("測定完了")
     print("送信中...")
     for arg in send_menu:
-        cursor.execute("INSERT INTO history (Timestamp, ID, PMM, SYS, menuname, price ,kcal, weight) value (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%f\",\"%f\")" % (str(Timestamp),ID,PMM,SYS,arg[1],arg[2],arg[3],round(weight,2)))
+        cursor.execute("INSERT INTO history (Timestamp, ID, PMM, SYS, menuname, price ,kcal, weight) value (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%f\",\"%f\")" % (str(Timestamp),ID,PMM,SYS.zfill(4),arg[1],arg[2],arg[3],round(weight,2)))
         conn.commit()
         print("送信完了")
 
