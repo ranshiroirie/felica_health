@@ -48,9 +48,9 @@ def on_connect(tag):
     if table == ():
         print("データベース新規登録")
         print("姓を入力してEnterして下さい")
-        surname = raw_input('>> ')
+        surname = input('>> ')
         print("名を入力してEnterして下さい")
-        givenname = raw_input('>> ')
+        givenname = input('>> ')
         cursor.execute("INSERT INTO card_id (ID, PMM, SYS, surname, givenname) value (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\")" % (ID,PMM,SYS,surname,givenname))
         conn.commit()
         print("登録完了")
