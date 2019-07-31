@@ -46,12 +46,18 @@ def on_connect(tag):
 		go_to_exit()
 
 	if table == ():
-		cursor.execute("INSERT INTO card_id (ID, PMM, SYS) value (\"%s\",\"%s\",\"%s\")" % (ID,PMM,SYS))
+		print("データベース新規登録")
+		print("姓を入力してEnterして下さい")
+    	surname = raw_input('>> ')
+    	print("名を入力してEnterして下さい")
+    	givenname = raw_input('>> ')
+		cursor.execute("INSERT INTO card_id (ID, PMM, SYS, surname, givenname) value (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\")" % (ID,PMM,SYS,surname,givenname))
 		conn.commit()
-		print("データベース新規登録中")
+		print("登録完了")
 
 	else:
 		print ("データベースに登録済み")
+		print ("ユーザー名: %s %s" % (table[0][3], table[0][4]))
 
 	# 購入履歴の送信
 	weight = 0
