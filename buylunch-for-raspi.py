@@ -23,7 +23,7 @@ measuretimes = 5 #計測回数
 def db_connect():
     global conn, cursor
     try:
-        conn = pymysql.connect(host="52.197.122.211", user="health01", password="felicahealth01", db="felica_health", charset="utf8")
+        conn = pymysql.connect(host="13.112.115.196", user="health01", password="felicahealth01", db="felica_health", charset="utf8")
         cursor = conn.cursor()
     except pymysql.err.OperationalError:
         print("ネットワーク接続失敗！接続状況を確認して下さい")
